@@ -1,7 +1,0 @@
-streamlit>=1.50
-pydantic>=2.6
-python-dotenv>=1.0
-pyyaml>=6.0
-httpx>=0.27
-# Live generation (GROQ_API_KEY set). Demo mode works without it.
-crewai>=0.100
