@@ -6,6 +6,9 @@
 
 Four AI agents read your user story, design the test cases, write the test code and review their own work, live in front of you.
 
+**[Live demo: req2test.onrender.com](https://req2test.onrender.com/)**
+<br/><sub>Hosted on Render's free tier. The first load after a quiet spell can take up to a minute while the server wakes up.</sub>
+
 ![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=flat-square&logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white)
 ![CrewAI](https://img.shields.io/badge/CrewAI-multi--agent-FF5A50?style=flat-square)
