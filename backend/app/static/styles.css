@@ -141,6 +141,7 @@ input::placeholder, textarea::placeholder { color: var(--faint); }
 
 .badge { display: inline-flex; align-items: center; gap: 6px; height: 22px; padding: 0 9px; border-radius: 999px; font-size: 12px; font-weight: 500; white-space: nowrap; border: 1px solid transparent; }
 .badge.positive, .badge.negative, .badge.edge { text-transform: capitalize; }
+.badge.plain { text-transform: none; }
 .badge.positive::before, .badge.negative::before, .badge.edge::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; box-shadow: 0 0 8px currentColor; }
 .badge.positive { background: var(--pos-soft); color: var(--pos); border-color: rgba(52, 211, 153, .25); }
 .badge.negative { background: var(--neg-soft); color: var(--neg); border-color: rgba(251, 113, 133, .25); }
@@ -535,7 +536,7 @@ textarea { display: block; width: 100%; min-height: 290px; resize: vertical; pad
 .drawer header { padding: 22px 22px 18px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; background: linear-gradient(180deg, rgba(139, 123, 255, .1), transparent); }
 .d-title { margin-top: 10px; font-size: 19px; letter-spacing: -.02em; line-height: 1.35; }
 .kv { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
-.drawer .body { padding: 22px; overflow: auto; display: grid; gap: 24px; align-content: start; }
+.drawer .body { padding: 22px; overflow: auto; display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; align-content: start; }
 .drawer .body > div { animation: rowin .55s var(--ease) backwards; animation-delay: calc(var(--i, 0) * 80ms + 150ms); }
 .verifies { margin-top: 10px; line-height: 1.6; }
 .steps { list-style: none; margin: 12px 0 0; padding: 0; counter-reset: s; }

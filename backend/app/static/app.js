@@ -598,7 +598,7 @@
     const rows = r.criteria.map((c, i) => {
       const n = countFor(r, c.id);
       return `<div class="req" data-key="ac-${esc(c.id)}" style="--i:${Math.min(i, 16)}"><span class="id">${esc(c.id)}</span><div><div>${esc(c.text)}</div>${c.ambiguity_note ? `<div class="q">${icon('alert')}<div><strong>Open question.</strong> ${esc(c.ambiguity_note)}</div></div>` : ''}</div>
-        <div>${hasTests ? (n ? `<span class="badge neutral">${plural(n, 'test')}</span>` : '<span class="badge negative">No tests</span>') : ''}</div></div>`;
+        <div>${hasTests ? (n ? `<span class="badge neutral">${plural(n, 'test')}</span>` : '<span class="badge negative plain">No tests</span>') : ''}</div></div>`;
     }).join('');
     return `<div class="toolbar"><span class="hint">${criteriaWord(r.criteria.length)} extracted${open ? `, <strong class="warn-t">${plural(open, 'open question')}</strong> to confirm with the product owner` : ''}.</span></div><div class="reqs">${rows}</div>`;
   }
@@ -621,7 +621,7 @@
     const rows = r.criteria.map((c, ri) => {
       const cells = tests.map((t, ci) => t.criterion_id === c.id ? `<td class="cell"><i class="${t.type}" style="--r:${ri + ci * 0.15}" data-act="tc" data-id="${esc(t.id)}" title="${esc(t.id)}: ${esc(t.title)}"></i></td>` : '<td class="cell"></td>').join('');
       const n = countFor(r, c.id);
-      return `<tr><td class="first"><span class="mono acid">${esc(c.id)}</span> ${esc(c.text)}</td>${cells}<td class="last">${n ? plural(n, 'test') : '<span class="badge negative">No tests</span>'}</td></tr>`;
+      return `<tr><td class="first"><span class="mono acid">${esc(c.id)}</span> ${esc(c.text)}</td>${cells}<td class="last">${n ? plural(n, 'test') : '<span class="badge negative plain">No tests</span>'}</td></tr>`;
     }).join('');
     return `<div class="toolbar legend"><span>Each square is a test case verifying that requirement. Click one to open it.</span><span><i class="lg-pos"></i>Positive</span><span><i class="lg-neg"></i>Negative</span><span><i class="lg-edge"></i>Edge</span></div>
       <div class="tbl-wrap"><table class="matrix"><thead><tr><th class="first">Acceptance criterion</th>${head}<th class="last">Coverage</th></tr></thead><tbody>${rows}</tbody></table></div>`;
