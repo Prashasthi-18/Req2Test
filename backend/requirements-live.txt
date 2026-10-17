@@ -1,0 +1,3 @@
+-r requirements.txt
+# Only needed when MOCK_MODE=false (live generation with CrewAI + Groq)
+crewai>=0.100

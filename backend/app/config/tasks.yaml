@@ -1,0 +1,69 @@
+# Tokens in <<double angle brackets>> are filled in by crew_runner.py before the task runs.
+
+analyze_requirements:
+  description: >
+    Read the requirement below and extract acceptance criteria.
+
+    Rules:
+    - Use ids AC-1, AC-2, ... in order.
+    - Each criterion is one atomic, testable statement. Do not merge unrelated behaviours.
+    - Only include behaviour that is stated or directly implied. Never invent business rules.
+    - If a rule is vague, missing a value, or contradictory, keep the criterion and put a short
+      question in ambiguity_note. Otherwise leave ambiguity_note empty.
+    - Also return a short feature_name such as "Login" or "Checkout".
+
+    REQUIREMENT:
+    <<story>>
+  expected_output: >
+    A feature_name and a list of acceptance criteria with id, text and optional ambiguity_note.
+
+design_test_cases:
+  description: >
+    Using the acceptance criteria from the previous task, design test cases.
+
+    Rules:
+    - Ids TC-001, TC-002, ... in order. Every test references exactly one criterion_id.
+    - type is one of: <<types>>. Only produce those types.
+    - priority: P0 for core flows and security-sensitive behaviour, P1 for important validation,
+      P2 for minor behaviour.
+    - Every criterion needs at least one test when it can be verified through the browser UI.
+    - Include boundary values (limits, exact thresholds) as edge cases where the criterion has them.
+    - Steps are short imperative sentences. expected is one observable result.
+    - <<depth>>
+    - Do not create near-duplicate tests.
+  expected_output: >
+    A list of test cases with id, criterion_id, title, type, priority, steps and expected.
+
+write_playwright_scripts:
+  description: >
+    Write Playwright TypeScript for the test cases.
+
+    Rules:
+    - Produce one page object file at pages/<Feature>Page.ts and one spec file at
+      tests/<feature>.spec.ts. File names are relative paths.
+    - Import from '@playwright/test'. The spec imports the page object with a relative path.
+    - The page object exposes readonly Locator properties and a goto() method.
+    - Prefer getByRole, getByLabel, getByText and getByTestId. No CSS or XPath selectors.
+    - Test titles must start with the test case id and type, for example
+      "TC-003 [negative] Wrong password shows a generic error".
+    - Every test contains at least one expect(). Never use waitForTimeout or fixed sleeps.
+    - Use only relative URLs with page.goto('/path'); the base URL <<base_url>> is set in config.
+    - Use realistic literal test data. Do not leave TODO comments.
+  expected_output: >
+    A list of files, each with a relative filename and complete TypeScript code.
+
+review_suite:
+  description: >
+    Review the acceptance criteria, test cases and generated code.
+
+    Check for:
+    1. GAPS: criteria that no test verifies. Give the criterion_id, the issue and a concrete suggestion.
+    2. DUPLICATES: tests that verify the same behaviour with the same steps. Report removed_id and
+       kept_id and remove the duplicate from the code.
+    3. WEAK ASSERTIONS: tests with no expect(), or only asserting that something exists when a value
+       should be checked. Report test_id, issue and fix, and fix them in the code.
+
+    Return the complete corrected files (all files, not only the changed ones) and the report.
+    Leave coverage_percent as 0; it is computed by the system. Keep the summary to two sentences.
+  expected_output: >
+    A review report (gaps, duplicates_removed, weak_assertions, summary) and the full final files.
